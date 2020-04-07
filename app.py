@@ -4,7 +4,8 @@ from db import db
 import os
 
 from resources.user import User
-from resources.exercise import Exercise, ExerciseList
+from resources.exercise import Exercise
+from resources.exercise_list import ExerciseList
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///exercise-tracker')

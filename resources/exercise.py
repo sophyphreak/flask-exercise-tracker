@@ -34,13 +34,10 @@ class Exercise(Resource):
         description = data['description']
         duration = data['duration']
         if data['date']:
-            date = data['date']
+            date = arrow.get(data['date']).datetime
         else:
-            date = arrow.utcnow().format('YYYY-MM-DD')
+            date = arrow.utcnow().datetime
 
         new_exercise = ExerciseModel(user_id, description, duration, date)
         new_exercise.save_to_db()
         return new_exercise.json(), 201
-
-class ExerciseList(Resource):
-    parser = reqparse.RequestParser()
