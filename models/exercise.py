@@ -1,13 +1,13 @@
 from db import db
-import datetime
+import arrow
 
 class ExerciseModel(db.Model):
     __tablename__ = 'exercise'
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(80))
     duration = db.Column(db.Integer)
-    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    date = db.Column(db.String(80), default=arrow.utcnow().format('YYYY-MM-DD'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, user_id, description, duration, date):
         self.description = description
