@@ -1,19 +1,21 @@
 from flask_restful import Resource, reqparse
 
-from models.user import UserModel 
+from models.user import UserModel
+
 
 class User(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('username',
+    parser.add_argument(
+        "username",
         type=str,
-        location='form',
+        location="form",
         required=True,
-        help="username cannot be empty"
+        help="username cannot be empty",
     )
 
     def post(self):
         data = User.parser.parse_args()
-        username = data['username'] 
+        username = data["username"]
 
         already_exists = UserModel.find_by_username(username)
         if already_exists:
